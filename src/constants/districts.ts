@@ -1,3 +1,7 @@
+// KNOWN LIMITATION: Bihar-only static list. Tracked in Mobile Spec v2, 
+// Section 9 — replace with Google Geocoding API when pan-India expansion 
+// happens. Do not extend this list manually.
+
 export const BIHAR_DISTRICTS = [
   "Araria", "Arwal", "Aurangabad", "Banka", "Begusarai", "Bhagalpur", "Bhojpur", "Buxar",
   "Darbhanga", "East Champaran", "Gaya", "Gopalganj", "Jamui", "Jehanabad", "Kaimur",
