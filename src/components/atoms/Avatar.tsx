@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, Text, View } from 'react-native';
 import { User } from 'lucide-react-native';
+import { TEXT_SECONDARY } from '@/core/theme';
 import type { AccessibleProps } from '@/types/accessibility';
 
 export type AvatarSize = 'small' | 'medium' | 'large' | 'xlarge';
@@ -76,7 +77,7 @@ export function Avatar({
             {fallback}
           </Text>
         ) : (
-          <User size={ICON_SIZE[size]} color="#6B7280" />
+          <User size={ICON_SIZE[size]} color={TEXT_SECONDARY} />
         )}
       </View>
       {status ? (

@@ -1090,6 +1090,21 @@ to consume, not to power any new user-visible screen yet.
 > each) — no theme tokens, API client, repositories, services, or Zustand slices are implemented
 > yet. See `docs/implementation/M1-Engineering-Foundation-Report.md` for full details.
 
+> **M2 (Theme Foundation) status — 2026-07-20:** Phase 0.3 is done for its token-extraction half:
+> `src/core/theme/tokens/{colors,typography,spacing,radius,elevation,opacity}.ts`,
+> `src/core/theme/theme.ts` (the `{light, dark}` Tokens structure), `ThemeProvider.tsx`, and the
+> `@/core/theme` barrel are all implemented per Section 8, and `ThemeProvider` is wired into
+> `app/_layout.tsx` (this milestone's slice of Phase 0.7, which otherwise remains unstarted —
+> `QueryClientProvider`/`LanguageProvider` are not part of M2). Every JS-level hardcoded hex color
+> Section 8's "Eliminating Hardcoded Colors" checklist names has been migrated to the new tokens.
+> **Not** done as part of Phase 0.3: the `DoctorCard` radius mismatch and the Ghost-button height
+> bug were deliberately left unfixed (fixing either changes rendered output, out of scope for a
+> "UI stays visually identical" milestone); `icons.ts` was not built (outside this milestone's
+> given Design Tokens checklist); `className`-level typography/spacing/radius/shadow values were
+> not migrated (a much larger, redesign-adjacent change); `tailwind.config.js` was not regenerated
+> from `colors.ts` (both remain independently hand-kept in sync). See
+> `docs/implementation/M2-Theme-Foundation-Report.md` for full details.
+
 ---
 
 ## 21. Risk Register

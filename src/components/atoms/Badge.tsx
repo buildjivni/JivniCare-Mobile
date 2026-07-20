@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Svg, { Defs, LinearGradient as SvgLinearGradient, Rect, Stop } from 'react-native-svg';
 import { Check, Star } from 'lucide-react-native';
+import { EARLY_PARTNER_GRADIENT_END, EARLY_PARTNER_GRADIENT_START, WHITE } from '@/core/theme';
 import type { AccessibleProps } from '@/types/accessibility';
 
 export type BadgeVariant = 'verified' | 'status' | 'earlyPartner';
@@ -31,8 +32,8 @@ function DefaultIcon({ variant }: { variant: BadgeVariant }) {
   // Per Design-System.md's Icon Library: `Check` maps to the Verified badge, `Star` maps to
   // Early Partner. Neither is an emoji — this satisfies the emoji/icon split the table calls
   // out for structural UI elements.
-  if (variant === 'verified') return <Check size={12} color="#FFFFFF" />;
-  if (variant === 'earlyPartner') return <Star size={12} color="#FFFFFF" />;
+  if (variant === 'verified') return <Check size={12} color={WHITE} />;
+  if (variant === 'earlyPartner') return <Star size={12} color={WHITE} />;
   return null;
 }
 
@@ -75,8 +76,8 @@ export function Badge({
         <Svg style={StyleSheet.absoluteFill} width="100%" height="100%">
           <Defs>
             <SvgLinearGradient id="earlyPartnerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <Stop offset="0%" stopColor="#F59E0B" />
-              <Stop offset="100%" stopColor="#D97706" />
+              <Stop offset="0%" stopColor={EARLY_PARTNER_GRADIENT_START} />
+              <Stop offset="100%" stopColor={EARLY_PARTNER_GRADIENT_END} />
             </SvgLinearGradient>
           </Defs>
           <Rect width="100%" height="100%" fill="url(#earlyPartnerGradient)" />

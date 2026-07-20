@@ -1,5 +1,6 @@
 import React from 'react';
 import { Circle, Clock, Users, BellOff } from 'lucide-react-native';
+import { WHITE } from '@/core/theme';
 import { Badge } from '@/components/atoms';
 import type { AccessibleProps } from '@/types/accessibility';
 
@@ -18,13 +19,13 @@ function StatusIcon({ status }: { status: QueueStatusBadgeStatus }) {
   // Structural UI icons per Design-System.md — Lucide, not emoji.
   switch (status) {
     case 'available':
-      return <Circle size={10} color="#FFFFFF" fill="#FFFFFF" />;
+      return <Circle size={10} color={WHITE} fill={WHITE} />;
     case 'onBreak':
-      return <Clock size={12} color="#FFFFFF" />;
+      return <Clock size={12} color={WHITE} />;
     case 'busy':
-      return <Users size={12} color="#FFFFFF" />;
+      return <Users size={12} color={WHITE} />;
     case 'offline':
-      return <BellOff size={12} color="#FFFFFF" />;
+      return <BellOff size={12} color={WHITE} />;
   }
 }
 

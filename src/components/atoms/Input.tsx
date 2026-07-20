@@ -8,6 +8,7 @@ import {
   View,
 } from 'react-native';
 import { Search, X } from 'lucide-react-native';
+import { BORDER_FOCUS, ERROR, TEXT_TERTIARY } from '@/core/theme';
 import type { AccessibleProps } from '@/types/accessibility';
 
 export type InputType = 'text' | 'phone' | 'search';
@@ -34,9 +35,10 @@ const KEYBOARD_TYPE_BY_INPUT_TYPE: Record<InputType, KeyboardTypeOptions> = {
   search: 'default',
 };
 
-const COLOR_BORDER_FOCUS = '#5696C7';
-const COLOR_ERROR = '#DC2626';
-const COLOR_TEXT_TERTIARY = '#9CA3AF';
+// Theme-sourced (Section 8, docs/engineering/Sprint-0-Engineering-Design.md).
+const COLOR_BORDER_FOCUS = BORDER_FOCUS;
+const COLOR_ERROR = ERROR;
+const COLOR_TEXT_TERTIARY = TEXT_TERTIARY;
 
 export function Input({
   type = 'text',

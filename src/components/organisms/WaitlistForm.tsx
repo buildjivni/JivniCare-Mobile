@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { CheckCircle } from 'lucide-react-native';
+import { SUCCESS, WHITE } from '@/core/theme';
 import { Input, Button, Badge } from '@/components/atoms';
 import type { AccessibleProps } from '@/types/accessibility';
 
@@ -174,7 +175,7 @@ export function WaitlistForm({
         }
         testID={testID ? `${testID}-success` : undefined}
       >
-        <CheckCircle size={48} color="#16A34A" />
+        <CheckCircle size={48} color={SUCCESS} />
         <Text className="text-center text-[18px] font-semibold leading-[23px] text-textPrimary">
           {resolvedHeading}
         </Text>
@@ -182,7 +183,7 @@ export function WaitlistForm({
           <Badge
             variant="verified"
             text={`#${position}`}
-            icon={<CheckCircle size={12} color="#FFFFFF" />}
+            icon={<CheckCircle size={12} color={WHITE} />}
             accessibilityLabel={`You are number ${position} on the waitlist`}
           />
         ) : null}

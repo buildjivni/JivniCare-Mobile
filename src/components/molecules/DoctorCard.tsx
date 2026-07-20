@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Platform, Pressable, Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import { BadgeCheck, Clock } from 'lucide-react-native';
+import { ELEVATION, PRIMARY, TEXT_SECONDARY } from '@/core/theme';
 import { Avatar, Badge, Button } from '@/components/atoms';
 import type { AccessibleProps } from '@/types/accessibility';
 import { QueueStatusBadge, type QueueStatusBadgeStatus } from './QueueStatusBadge';
@@ -110,15 +111,10 @@ export function DoctorCard({
     .filter(Boolean)
     .join(' ');
 
-  const cardShadowStyle =
-    Platform.OS === 'android'
-      ? { elevation: 4 }
-      : {
-          shadowColor: '#000',
-          shadowOpacity: 0.1,
-          shadowRadius: 6,
-          shadowOffset: { width: 0, height: 4 },
-        };
+  // shadow-md per docs/08-Design-System.md's Card System ("Shadow: shadow-md") — centralized
+  // token from core/theme/tokens/elevation.ts (Section 8 of the Sprint 0 Engineering Design
+  // doc); values are unchanged from this card's previous inline platform branch.
+  const cardShadowStyle = ELEVATION.md;
 
   return (
     <Pressable
@@ -164,7 +160,7 @@ export function DoctorCard({
                     // green `verified` pill, per docs/09-Component-Library.md Section 2.1.
                     <BadgeCheck
                       size={16}
-                      color="#5696C7"
+                      color={PRIMARY}
                       accessibilityElementsHidden
                       importantForAccessibility="no"
                     />
@@ -214,7 +210,7 @@ export function DoctorCard({
           <View className="min-w-0 flex-1 flex-row items-center gap-1.5">
             <Clock
               size={14}
-              color="#6B7280"
+              color={TEXT_SECONDARY}
               accessibilityElementsHidden
               importantForAccessibility="no"
             />
@@ -230,7 +226,7 @@ export function DoctorCard({
           <View className="min-w-0 flex-1 flex-row items-center gap-1.5">
             <Clock
               size={14}
-              color="#6B7280"
+              color={TEXT_SECONDARY}
               accessibilityElementsHidden
               importantForAccessibility="no"
             />

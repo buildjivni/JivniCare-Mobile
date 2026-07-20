@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ActivityIndicator, Pressable, Text, View } from 'react-native';
+import { PRIMARY, TEXT_PRIMARY, WHITE } from '@/core/theme';
 import type { AccessibleProps } from '@/types/accessibility';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'ghost' | 'outline';
@@ -76,11 +77,11 @@ const VARIANT_TEXT_CLASS: Record<ButtonVariant, string> = {
 };
 
 const VARIANT_ICON_COLOR: Record<ButtonVariant, string> = {
-  primary: '#FFFFFF',
-  secondary: '#5696C7',
-  danger: '#FFFFFF',
-  ghost: '#5696C7',
-  outline: '#1F2937',
+  primary: WHITE,
+  secondary: PRIMARY,
+  danger: WHITE,
+  ghost: PRIMARY,
+  outline: TEXT_PRIMARY,
 };
 
 export function Button({

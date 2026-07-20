@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { AlertTriangle } from 'lucide-react-native';
+import { ERROR } from '@/core/theme';
 import { Button } from '@/components/atoms';
 import type { AccessibleProps } from '@/types/accessibility';
 
@@ -414,7 +415,7 @@ export function BookingWidget({
           <View className="flex-row items-start gap-2 rounded-[12px] border border-error bg-error/10 p-3">
             <AlertTriangle
               size={18}
-              color="#DC2626"
+              color={ERROR}
               accessibilityElementsHidden
               importantForAccessibility="no"
             />
