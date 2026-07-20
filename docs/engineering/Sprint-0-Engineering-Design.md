@@ -1105,6 +1105,32 @@ to consume, not to power any new user-visible screen yet.
 > from `colors.ts` (both remain independently hand-kept in sync). See
 > `docs/implementation/M2-Theme-Foundation-Report.md` for full details.
 
+> **M3 (Core Foundation) status — 2026-07-20:** Phase 0.2's remaining `src/core/` modules are
+> done: `config/` (`env.ts` — typed `AppEnvironment`, `API_BASE_URL`, `API_TIMEOUT_MS`), `logger/`
+> (`logger.debug/info/warn/error`, console-backed in development, silent in production, with a
+> `setLoggerProvider` seam per Section 14), `storage/` (`StorageAdapter` interface +
+> `SecureStoreAdapter`/`AsyncStorageAdapter`, generic only — no auth/token storage), and `network/`
+> (NetInfo connectivity wrapper + request/response/interceptor **types**, per the folder tree's
+> literal "NetInfo wrapper, connectivity singleton" description — no HTTP client, since Section 5's
+> `src/api/client.ts` remains unbuilt and out of scope). A new `core/errors/` module
+> (`AppError`/`NetworkError`/`ValidationError`/`StorageError`/`ConfigurationError`) was added — this
+> hierarchy is **not** in this document's original Section 5/8 (which documents only the narrower,
+> API-layer `ApiError`); it was added because M3's own instructions explicitly named it, and lives
+> in `core/` since `network`/`storage`/`config` all need a shared error type. `src/constants/`
+> gained `storageKeys.ts` and `featureFlags.ts` only (routes/api/businessRules/specialties/
+> queryKeys were excluded as feature-specific, business-rule, or React-Query-dependent content,
+> per M3's "no feature constants"/"no business logic" instructions). `src/utils/` gained
+> `date.ts`/`string.ts`/`validation.ts`/`format.ts` (generic helpers only, matching M3's own 4
+> named examples) — built as new standalone functions, **not** wired into `DoctorCard.tsx`/
+> `WaitlistForm.tsx`'s existing private duplicates (that consumer migration is component-level
+> work this milestone's "no feature implementation" scope doesn't cover). `core/i18n/` was
+> **deliberately left untouched**: this document cites an "i18n architecture" at two different
+> section numbers (line 141's "Section 18" and line 975's "Section 22"), and neither actually
+> contains one — Section 18 is Accessibility Strategy and Section 22 (Phase 0.11) is the
+> `BookingWidget` naming-collision decision; no concrete `LanguageProvider`/`t()`/string-resource
+> design exists anywhere in this document to build against. See
+> `docs/implementation/M3-Core-Foundation-Report.md` for full details.
+
 ---
 
 ## 21. Risk Register
