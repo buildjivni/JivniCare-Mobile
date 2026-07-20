@@ -1131,6 +1131,27 @@ to consume, not to power any new user-visible screen yet.
 > design exists anywhere in this document to build against. See
 > `docs/implementation/M3-Core-Foundation-Report.md` for full details.
 
+> **M4 (API Foundation) status — 2026-07-20:** Phase 0.4's non-endpoint half of `src/api/` is
+> done: `client.ts` (`ApiClient`/`apiClient` — a generic, typed `fetch` wrapper reading
+> `API_BASE_URL`/`API_TIMEOUT_MS` from `core/config` and using `core/network`'s
+> `RequestConfig`/`ApiResponse<T>`/`HttpMethod` types, per Section 5), `errors.ts`
+> (`mapTransportError`/`assertValidBaseUrl` — transport-only mapping into `core/errors`, not
+> `ApiError`), `interceptors/registry.ts` (an empty, four-slot-documented registration pipeline —
+> no auth/logging/retry/refresh-token logic), and `types/common.ts` (`ApiErrorResponse`,
+> `PaginatedResponse<T>`, `RequestOptions`, re-exporting `core/network`'s `ApiResponse<T>`).
+> `endpoints/{auth,doctor,booking,queue,profile,notifications}/index.ts` are `export {}`
+> placeholders only, per this milestone's own exact folder list (not Section 2's slightly
+> different repository-layer list, which also has `waitlist/`). `errors.ts`'s `ApiError` class,
+> `interceptors/*` implementations, `endpoints/*` functions, and `queryClient.ts` remain
+> unbuilt — all explicitly out of this milestone's scope. A new `UnknownError` class was added
+> to M3's `core/errors/` module (this milestone's own instruction named it alongside
+> `NetworkError`/`ConfigurationError` as a "Core Error type"). Cross-checked
+> `docs/11-API-Contract.md` against this document per this milestone's own instruction — no
+> blocking conflict found; every discrepancy the contract raises (flat-vs-enveloped responses,
+> `requestId` vs `idempotencyKey`, 30-min vs 15-min access token, cookie-vs-Bearer Blocker 1) was
+> already anticipated and reconciled by this document's existing Section 5 text. See
+> `docs/implementation/M4-API-Foundation-Report.md` for full details.
+
 ---
 
 ## 21. Risk Register
