@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import { AlertTriangle } from 'lucide-react-native';
-import { Button } from '../atoms/Button';
-import type { AccessibleProps } from '../../types/accessibility';
+import { Button } from '@/components/atoms';
+import type { AccessibleProps } from '@/types/accessibility';
 
 /**
  * ⚠️ SPEC DEVIATION — flagged per `13-AI-Development-Rules.md` Rules 1/2/5 rather than silently
@@ -101,7 +101,10 @@ interface BookingErrorCopy {
  * doctor-level message since that's the more common case ("no slots" is the general queue-full
  * scenario this widget's slot list already deals with).
  */
-const BOOKING_ERROR_MESSAGES: Record<BookingErrorCode, BookingErrorCopy | { doctorLevel: BookingErrorCopy; patientLevel: BookingErrorCopy }> = {
+const BOOKING_ERROR_MESSAGES: Record<
+  BookingErrorCode,
+  BookingErrorCopy | { doctorLevel: BookingErrorCopy; patientLevel: BookingErrorCopy }
+> = {
   QUEUE_FULL: {
     en: 'Queue just got full. Join Waitlist?',
     hi: 'Queue abhi full ho gaya. Waitlist join karein?',
@@ -179,11 +182,14 @@ export interface GetBookingErrorMessageOptions {
  * widget uses internally, mirroring `OTPInputBox.tsx`'s exported `mapVerifyOtpApiError` pattern. */
 export function getBookingErrorMessage(
   code: BookingErrorCode,
-  { language = 'en', doctorName, dailyLimitContext = 'doctorLevel' }: GetBookingErrorMessageOptions = {}
+  {
+    language = 'en',
+    doctorName,
+    dailyLimitContext = 'doctorLevel',
+  }: GetBookingErrorMessageOptions = {},
 ): string {
   const entry = BOOKING_ERROR_MESSAGES[code];
-  const copy: BookingErrorCopy =
-    'doctorLevel' in entry ? entry[dailyLimitContext] : entry;
+  const copy: BookingErrorCopy = 'doctorLevel' in entry ? entry[dailyLimitContext] : entry;
   const template = copy[language];
   return doctorName ? template.replace('{name}', doctorName) : template;
 }
@@ -292,9 +298,14 @@ export function BookingWidget({
       const code = isBookingErrorCode((rawError as BookingSubmitError | undefined)?.code)
         ? (rawError as BookingSubmitError).code
         : undefined;
-      const resolvedDoctorName = (rawError as BookingSubmitError | undefined)?.doctorName ?? doctorName;
+      const resolvedDoctorName =
+        (rawError as BookingSubmitError | undefined)?.doctorName ?? doctorName;
       const message = code
-        ? getBookingErrorMessage(code, { language, doctorName: resolvedDoctorName, dailyLimitContext })
+        ? getBookingErrorMessage(code, {
+            language,
+            doctorName: resolvedDoctorName,
+            dailyLimitContext,
+          })
         : GENERIC_ERROR_COPY[language];
       setStatus('error');
       setErrorMessage(message);
@@ -341,7 +352,11 @@ export function BookingWidget({
                   hitSlop={{ top: 4, bottom: 4, left: 4, right: 4 }}
                   accessibilityRole="radio"
                   accessibilityLabel={slot.label}
-                  accessibilityState={{ disabled: isSlotDisabled, selected: isSelected, checked: isSelected }}
+                  accessibilityState={{
+                    disabled: isSlotDisabled,
+                    selected: isSelected,
+                    checked: isSelected,
+                  }}
                   testID={testID ? `${testID}-slot-${slot.id}` : undefined}
                 >
                   <Text
@@ -391,11 +406,22 @@ export function BookingWidget({
         `expo-haptics` is not yet a project dependency — flagged in `docs/15-Known-Gaps.md`
         rather than added unprompted.
       */}
-      <View accessibilityLiveRegion="assertive" accessibilityRole={status === 'error' ? 'alert' : 'none'}>
+      <View
+        accessibilityLiveRegion="assertive"
+        accessibilityRole={status === 'error' ? 'alert' : 'none'}
+      >
         {status === 'error' && errorMessage ? (
           <View className="flex-row items-start gap-2 rounded-[12px] border border-error bg-error/10 p-3">
-            <AlertTriangle size={18} color="#DC2626" accessibilityElementsHidden importantForAccessibility="no" />
-            <Text className="flex-1 text-[14px] leading-[21px] text-error" accessibilityLabel={errorMessage}>
+            <AlertTriangle
+              size={18}
+              color="#DC2626"
+              accessibilityElementsHidden
+              importantForAccessibility="no"
+            />
+            <Text
+              className="flex-1 text-[14px] leading-[21px] text-error"
+              accessibilityLabel={errorMessage}
+            >
               {errorMessage}
             </Text>
           </View>

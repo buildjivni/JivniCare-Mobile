@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ActivityIndicator, Pressable, Text, View } from 'react-native';
-import type { AccessibleProps } from '../../types/accessibility';
+import type { AccessibleProps } from '@/types/accessibility';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'ghost' | 'outline';
 export type ButtonSize = 'small' | 'medium' | 'large';
@@ -117,7 +117,9 @@ export function Button({
     .filter(Boolean)
     .join(' ');
 
-  const textClasses = ['font-semibold', TEXT_SIZE_CLASS[size], VARIANT_TEXT_CLASS[variant]].join(' ');
+  const textClasses = ['font-semibold', TEXT_SIZE_CLASS[size], VARIANT_TEXT_CLASS[variant]].join(
+    ' ',
+  );
 
   return (
     <Pressable

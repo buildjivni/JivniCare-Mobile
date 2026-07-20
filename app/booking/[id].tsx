@@ -39,13 +39,18 @@ export default function BookingScreen() {
   // --- Error simulator (dev-only) — lets us keep exercising the 13 B6 error codes from
   // docs/05-Business-Rules.md against the real routing flow instead of a standalone sandbox. ---
   const [simulateError, setSimulateError] = useState(false);
-  const [selectedErrorCode, setSelectedErrorCode] = useState<BookingErrorCode>(BOOKING_ERROR_CODES[0]);
+  const [selectedErrorCode, setSelectedErrorCode] = useState<BookingErrorCode>(
+    BOOKING_ERROR_CODES[0],
+  );
 
   const handleBookingSubmit = async (slotId: string) => {
     await new Promise((resolve) => setTimeout(resolve, MOCK_SUBMIT_DELAY_MS));
 
     if (simulateError) {
-      const error: BookingSubmitError = { code: selectedErrorCode, doctorName: DOCTOR_NAME_WITHOUT_TITLE };
+      const error: BookingSubmitError = {
+        code: selectedErrorCode,
+        doctorName: DOCTOR_NAME_WITHOUT_TITLE,
+      };
       throw error;
     }
 

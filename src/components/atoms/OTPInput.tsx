@@ -7,7 +7,7 @@ import {
   type NativeSyntheticEvent,
   type TextInputKeyPressEventData,
 } from 'react-native';
-import type { AccessibleProps } from '../../types/accessibility';
+import type { AccessibleProps } from '@/types/accessibility';
 
 export interface OTPInputProps extends AccessibleProps {
   length?: number;

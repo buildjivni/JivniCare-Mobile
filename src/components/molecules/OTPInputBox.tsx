@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
-import { OTPInput } from '../atoms/OTPInput';
-import type { AccessibleProps } from '../../types/accessibility';
+import { OTPInput } from '@/components/atoms';
+import type { AccessibleProps } from '@/types/accessibility';
 
 /**
  * OTP verification failure codes mapped from F01 `POST /api/v1/auth/verify-otp`
@@ -131,7 +131,9 @@ export function OTPInputBox({
           accessibilityHint="Returns to phone number entry"
           accessibilityState={{ disabled }}
         >
-          <Text className="text-[14px] font-semibold leading-[21px] text-primary">{changePhoneLabel}</Text>
+          <Text className="text-[14px] font-semibold leading-[21px] text-primary">
+            {changePhoneLabel}
+          </Text>
         </Pressable>
       </View>
 
@@ -172,7 +174,9 @@ export function OTPInputBox({
             accessibilityLabel={resendLabel}
             accessibilityState={{ disabled }}
           >
-            <Text className="text-[14px] font-semibold leading-[21px] text-primary">{resendLabel}</Text>
+            <Text className="text-[14px] font-semibold leading-[21px] text-primary">
+              {resendLabel}
+            </Text>
           </Pressable>
         ) : (
           <Text

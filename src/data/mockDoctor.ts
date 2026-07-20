@@ -1,4 +1,4 @@
-import type { DoctorCardDoctor } from '../components/molecules/DoctorCard';
+import type { DoctorCardDoctor } from '@/components/molecules';
 
 /**
  * MVP placeholder doctor used to wire up the Home / Doctor Profile / Booking screens before

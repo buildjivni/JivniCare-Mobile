@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Platform, Pressable, Text, View } from 'react-native';
 import { BadgeCheck, Clock } from 'lucide-react-native';
-import { Avatar } from '../atoms/Avatar';
-import { Badge } from '../atoms/Badge';
-import { Button } from '../atoms/Button';
+import { Avatar, Badge, Button } from '@/components/atoms';
+import type { AccessibleProps } from '@/types/accessibility';
 import { QueueStatusBadge, type QueueStatusBadgeStatus } from './QueueStatusBadge';
-import type { AccessibleProps } from '../../types/accessibility';
 
 // Doctor Availability & Booking Automation overhaul (Founder directive, 2026-07-19) — see
 // docs/05-Business-Rules.md Section 16, docs/07-Mobile-UX-Spec.md's DoctorCard Component Spec,
@@ -113,7 +111,14 @@ export function DoctorCard({
     .join(' ');
 
   const cardShadowStyle =
-    Platform.OS === 'android' ? { elevation: 4 } : { shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 6, shadowOffset: { width: 0, height: 4 } };
+    Platform.OS === 'android'
+      ? { elevation: 4 }
+      : {
+          shadowColor: '#000',
+          shadowOpacity: 0.1,
+          shadowRadius: 6,
+          shadowOffset: { width: 0, height: 4 },
+        };
 
   return (
     <Pressable
@@ -148,7 +153,10 @@ export function DoctorCard({
             <View className="flex-row items-start gap-2">
               <View className="min-w-0 flex-1 gap-0.5">
                 <View className="flex-row items-center gap-1">
-                  <Text className="shrink text-[18px] font-semibold leading-[23px] text-textPrimary" numberOfLines={1}>
+                  <Text
+                    className="shrink text-[18px] font-semibold leading-[23px] text-textPrimary"
+                    numberOfLines={1}
+                  >
                     {doctor.name}
                   </Text>
                   {doctor.isVerified ? (
@@ -204,15 +212,32 @@ export function DoctorCard({
             (docs/05-Business-Rules.md Rule DA1). */}
         <View className="flex-row items-center gap-2 rounded-[12px] bg-background px-3 py-2.5">
           <View className="min-w-0 flex-1 flex-row items-center gap-1.5">
-            <Clock size={14} color="#6B7280" accessibilityElementsHidden importantForAccessibility="no" />
-            <Text className="shrink text-[14px] leading-[21px] text-textSecondary" numberOfLines={1}>
-              {bookingLabel}: <Text className="font-semibold text-textPrimary">{doctor.bookingTime}</Text>
+            <Clock
+              size={14}
+              color="#6B7280"
+              accessibilityElementsHidden
+              importantForAccessibility="no"
+            />
+            <Text
+              className="shrink text-[14px] leading-[21px] text-textSecondary"
+              numberOfLines={1}
+            >
+              {bookingLabel}:{' '}
+              <Text className="font-semibold text-textPrimary">{doctor.bookingTime}</Text>
             </Text>
           </View>
           <View className="h-4 w-px bg-border" />
           <View className="min-w-0 flex-1 flex-row items-center gap-1.5">
-            <Clock size={14} color="#6B7280" accessibilityElementsHidden importantForAccessibility="no" />
-            <Text className="shrink text-[14px] leading-[21px] text-textSecondary" numberOfLines={1}>
+            <Clock
+              size={14}
+              color="#6B7280"
+              accessibilityElementsHidden
+              importantForAccessibility="no"
+            />
+            <Text
+              className="shrink text-[14px] leading-[21px] text-textSecondary"
+              numberOfLines={1}
+            >
               {opdLabel}: <Text className="font-semibold text-textPrimary">{doctor.opdTime}</Text>
             </Text>
           </View>

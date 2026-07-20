@@ -1,7 +1,7 @@
 import React from 'react';
 import { Circle, Clock, Users, BellOff } from 'lucide-react-native';
-import { Badge } from '../atoms/Badge';
-import type { AccessibleProps } from '../../types/accessibility';
+import { Badge } from '@/components/atoms';
+import type { AccessibleProps } from '@/types/accessibility';
 
 export type QueueStatusBadgeStatus = 'available' | 'onBreak' | 'busy' | 'offline';
 

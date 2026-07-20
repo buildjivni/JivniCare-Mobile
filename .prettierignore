@@ -1,0 +1,17 @@
+node_modules
+.expo
+dist
+web-build
+coverage
+assets
+package-lock.json
+android
+ios
+
+# Locked product/design/audit documentation (docs/13-AI-Development-Rules.md,
+# .cursorrules) — Prettier must never rewrite content in this folder.
+docs/
+
+# Expo/EAS config files are out of scope for this milestone's formatting pass.
+app.json
+eas.json

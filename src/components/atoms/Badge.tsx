@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Svg, { Defs, LinearGradient as SvgLinearGradient, Rect, Stop } from 'react-native-svg';
 import { Check, Star } from 'lucide-react-native';
-import type { AccessibleProps } from '../../types/accessibility';
+import type { AccessibleProps } from '@/types/accessibility';
 
 export type BadgeVariant = 'verified' | 'status' | 'earlyPartner';
 export type QueueStatus = 'available' | 'onBreak' | 'busy' | 'offline' | 'called' | 'waiting';
@@ -88,7 +88,10 @@ export function Badge({
 
   if (variant === 'status') {
     return (
-      <View className={`min-h-[24px] flex-row items-center rounded-[8px] ${STATUS_BG_CLASS[status]}`} {...sharedA11yProps}>
+      <View
+        className={`min-h-[24px] flex-row items-center rounded-[8px] ${STATUS_BG_CLASS[status]}`}
+        {...sharedA11yProps}
+      >
         {content}
       </View>
     );
@@ -96,7 +99,10 @@ export function Badge({
 
   // verified
   return (
-    <View className="min-h-[24px] flex-row items-center rounded-full bg-success" {...sharedA11yProps}>
+    <View
+      className="min-h-[24px] flex-row items-center rounded-full bg-success"
+      {...sharedA11yProps}
+    >
       {content}
     </View>
   );

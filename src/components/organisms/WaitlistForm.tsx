@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { CheckCircle } from 'lucide-react-native';
-import { Input } from '../atoms/Input';
-import { Button } from '../atoms/Button';
-import { Badge } from '../atoms/Badge';
-import type { AccessibleProps } from '../../types/accessibility';
+import { Input, Button, Badge } from '@/components/atoms';
+import type { AccessibleProps } from '@/types/accessibility';
 
 const MIN_NAME_LENGTH = 2;
 const PHONE_DIGIT_COUNT = 10;
@@ -193,11 +191,7 @@ export function WaitlistForm({
   }
 
   return (
-    <View
-      className="gap-4 rounded-[16px] bg-background p-4"
-      accessible={false}
-      testID={testID}
-    >
+    <View className="gap-4 rounded-[16px] bg-background p-4" accessible={false} testID={testID}>
       <Text
         className="text-[24px] font-bold leading-[29px] text-textPrimary"
         accessibilityRole="header"

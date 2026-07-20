@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import { Search, X } from 'lucide-react-native';
-import type { AccessibleProps } from '../../types/accessibility';
+import type { AccessibleProps } from '@/types/accessibility';
 
 export type InputType = 'text' | 'phone' | 'search';
 
@@ -63,13 +63,13 @@ export function Input({
   const borderClass = hasError
     ? 'border-error'
     : isFocused
-    ? 'border-borderFocus'
-    // Mirrors OTPInput's documented "Filled" border treatment (Design-System.md OTP Input
-    // section) for visual consistency across the input family — Text Input has no dedicated
-    // "Filled" spec of its own.
-    : isFilled
-    ? 'border-primary'
-    : 'border-border';
+      ? 'border-borderFocus'
+      : // Mirrors OTPInput's documented "Filled" border treatment (Design-System.md OTP Input
+        // section) for visual consistency across the input family — Text Input has no dedicated
+        // "Filled" spec of its own.
+        isFilled
+        ? 'border-primary'
+        : 'border-border';
 
   const containerClasses = [
     'min-h-[48px] flex-row items-center rounded-[12px] border bg-surface px-4',
@@ -85,7 +85,9 @@ export function Input({
 
   return (
     <View>
-      {label ? <Text className="mb-1 text-[12px] leading-[17px] text-textSecondary">{label}</Text> : null}
+      {label ? (
+        <Text className="mb-1 text-[12px] leading-[17px] text-textSecondary">{label}</Text>
+      ) : null}
       <View className={containerClasses}>
         {type === 'search' ? <Search size={20} color={iconColor} /> : null}
         <TextInput
@@ -123,7 +125,10 @@ export function Input({
       {hasError ? (
         // Error text is associated with the field and announced without requiring the user
         // to re-focus it, per docs/09-Component-Library.md Section 1.2.
-        <Text className="mt-1 text-[12px] leading-[17px] text-error" accessibilityLiveRegion="polite">
+        <Text
+          className="mt-1 text-[12px] leading-[17px] text-error"
+          accessibilityLiveRegion="polite"
+        >
           {error}
         </Text>
       ) : null}

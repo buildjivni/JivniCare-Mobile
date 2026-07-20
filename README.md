@@ -27,18 +27,18 @@ Full product, design, and API documentation lives in [`docs/`](./docs) — start
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | [Expo](https://expo.dev) (SDK 57) + React Native 0.86 |
-| Language | TypeScript (strict mode) |
-| Routing | Expo Router (file-based, `app/`) |
-| Styling | NativeWind 4 (Tailwind CSS for React Native) |
-| State | Zustand |
-| Icons | lucide-react-native |
-| Animations | react-native-reanimated / react-native-worklets |
-| State/config | react-native-safe-area-context, react-native-screens, react-native-svg |
-| Build/Distribution | EAS (`eas.json`) |
-| Package manager | npm (`package-lock.json` committed) |
+| Layer              | Technology                                                             |
+| ------------------ | ---------------------------------------------------------------------- |
+| Framework          | [Expo](https://expo.dev) (SDK 57) + React Native 0.86                  |
+| Language           | TypeScript (strict mode)                                               |
+| Routing            | Expo Router (file-based, `app/`)                                       |
+| Styling            | NativeWind 4 (Tailwind CSS for React Native)                           |
+| State              | Zustand                                                                |
+| Icons              | lucide-react-native                                                    |
+| Animations         | react-native-reanimated / react-native-worklets                        |
+| State/config       | react-native-safe-area-context, react-native-screens, react-native-svg |
+| Build/Distribution | EAS (`eas.json`)                                                       |
+| Package manager    | npm (`package-lock.json` committed)                                    |
 
 ---
 
@@ -55,14 +55,30 @@ jivnicare-mobile/
 │   ├── components/
 │   │   ├── atoms/          # Button, Input, Avatar, Badge, OTPInput
 │   │   ├── molecules/      # DoctorCard, BookingWidget, QueueStatusBadge, OTPInputBox
-│   │   └── organisms/      # WaitlistForm
-│   ├── data/                # Mock data used while backend integration is pending
-│   └── types/               # Shared TypeScript types
+│   │   ├── organisms/      # WaitlistForm
+│   │   ├── templates/      # (skeleton) full-page layout compositions
+│   │   ├── layout/         # (skeleton) structural wrappers (headers, containers)
+│   │   ├── animation/      # (skeleton) shared motion/animation components
+│   │   └── utility/        # (skeleton) non-visual utility components
+│   ├── core/                # (skeleton) theme, i18n, storage, network, logger, config
+│   ├── api/                  # (skeleton) HTTP client interceptors/endpoints
+│   ├── repositories/         # (skeleton) auth, doctor, booking, queue, waitlist, notification, profile, lead, consent
+│   ├── services/              # (skeleton) business/domain services
+│   ├── features/               # (skeleton) per-feature hooks (auth, search, doctor-profile, booking, queue, waitlist, my-bookings, notifications, profile, settings)
+│   ├── store/                   # (skeleton) global state (Zustand)
+│   ├── hooks/                    # (skeleton) shared cross-feature hooks
+│   ├── utils/                     # (skeleton) shared pure helper functions
+│   ├── constants/                  # (skeleton) shared constants (routes, config values)
+│   ├── data/                        # Mock data used while backend integration is pending
+│   └── types/                       # Shared TypeScript types
 ├── assets/
 │   └── brand/                # Brand SVGs (logos, app icons, wordmark) — see docs/08.1-Brand-Assets.md
 ├── docs/                     # Product/design/API documentation (source of truth — read first)
 ├── app.json                  # Expo app configuration
 ├── eas.json                  # EAS Build/Submit profiles
+├── eslint.config.js           # ESLint flat config (TS/RN/import/boundaries rules)
+├── .prettierrc.json            # Prettier formatting rules
+├── .prettierignore
 ├── babel.config.js
 ├── metro.config.js           # Metro bundler config (NativeWind integration)
 ├── tailwind.config.js
@@ -73,11 +89,18 @@ jivnicare-mobile/
 └── package-lock.json
 ```
 
+> The `src/` folders marked **(skeleton)** are directory-only scaffolding created in Sprint 0
+> Milestone 1 (Engineering Foundation) per
+> [`docs/engineering/Sprint-0-Engineering-Design.md`](./docs/engineering/Sprint-0-Engineering-Design.md).
+> They contain only a `.gitkeep` placeholder today — implementation lands in later Sprint 0
+> milestones (state, services, repositories, API client, etc.).
+
 ---
 
 ## Setup Instructions
 
 ### Prerequisites
+
 - Node.js 18+ (developed/verified against Node 24)
 - npm 10+
 - [Expo Go](https://expo.dev/go) app on a physical device, or an Android/iOS simulator
@@ -99,18 +122,17 @@ npm install
 
 ## Run Commands
 
-| Command | Description |
-|---|---|
-| `npm start` | Start the Expo dev server (Metro), scan the QR code with Expo Go |
-| `npm run android` | Start the dev server and open on a connected Android device/emulator |
-| `npm run ios` | Start the dev server and open on an iOS simulator (macOS only) |
-| `npm run web` | Start the dev server for web (requires `react-dom` + `react-native-web` — see [Known Limitations](#known-limitations)) |
-
-Type-check without emitting files:
-
-```bash
-npx tsc --noEmit
-```
+| Command                | Description                                                                                                            |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `npm start`            | Start the Expo dev server (Metro), scan the QR code with Expo Go                                                       |
+| `npm run android`      | Start the dev server and open on a connected Android device/emulator                                                   |
+| `npm run ios`          | Start the dev server and open on an iOS simulator (macOS only)                                                         |
+| `npm run web`          | Start the dev server for web (requires `react-dom` + `react-native-web` — see [Known Limitations](#known-limitations)) |
+| `npm run lint`         | Lint the project with ESLint                                                                                           |
+| `npm run lint:fix`     | Lint and auto-fix what's fixable                                                                                       |
+| `npm run format`       | Format the codebase with Prettier                                                                                      |
+| `npm run format:check` | Check formatting without writing changes                                                                               |
+| `npm run typecheck`    | Type-check without emitting files (`tsc --noEmit`)                                                                     |
 
 ---
 
@@ -146,8 +168,8 @@ npx eas build --platform android --profile development
 Once backend integration begins (see [`docs/11-API-Contract.md`](./docs/11-API-Contract.md)),
 expect an API base URL to be introduced as an Expo public environment variable, e.g.:
 
-| Variable (planned) | Purpose |
-|---|---|
+| Variable (planned)         | Purpose                               |
+| -------------------------- | ------------------------------------- |
 | `EXPO_PUBLIC_API_BASE_URL` | Base URL of the JivniCare backend API |
 
 No `.env` file exists in this repo today. If/when one is added, only variable **names** should
@@ -175,6 +197,7 @@ This is a **frontend-first, pre-backend-integration build**. Per
   `docs/15-Known-Gaps.md` Section 2.
 
 **Build verification performed for this audit:**
+
 - ✅ `npm install` — installs cleanly, lockfile is valid
 - ✅ `npx tsc --noEmit` — zero TypeScript errors
 - ✅ `npx expo export --platform android` — bundles successfully (3449 modules)
@@ -192,10 +215,13 @@ This is a **frontend-first, pre-backend-integration build**. Per
   `npx expo export --platform web` will fail until these are added. Not fixed as part of this
   audit pass since it is not a build-breaking issue for the primary Android/iOS targets and
   installing new dependencies was out of scope for an audit-prep pass.
-- **No ESLint configuration** — the repository has no `.eslintrc`/`eslint.config.*` and no lint
-  script in `package.json`. Not added during this audit pass to avoid introducing new tooling
-  beyond what the task required; flagged here for a follow-up decision.
-- **No automated test suite** — no test runner or test files currently exist in the repo.
+- **No automated test suite** — no test runner or test files currently exist in the repo (Jest/
+  RTL setup is out of scope for Sprint 0 Milestone 1 — Engineering Foundation).
+- **A handful of pre-existing lint warnings, not errors** — `npm run lint` exits `0` but surfaces
+  8 warnings on pre-existing code: hardcoded color/inline-style usage (design-token extraction is
+  Sprint 0 Phase 0.3, not yet implemented) and one `useRef(...).current` read during render in
+  `OTPInput.tsx` (flagged by the newer React Compiler-oriented `react-hooks/refs` rule). See
+  `docs/implementation/M1-Engineering-Foundation-Report.md` for details.
 - **Minor dependency version drift** — `npx expo-doctor` reports `react-native-worklets` and
   `react-native-reanimated` are slightly ahead of the versions Expo SDK 57 expects (minor/patch
   only). Does not affect bundling; left unchanged since it is not build-breaking.

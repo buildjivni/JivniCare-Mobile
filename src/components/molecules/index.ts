@@ -8,11 +8,7 @@ export {
   type BookingSubmitError,
   type GetBookingErrorMessageOptions,
 } from './BookingWidget';
-export {
-  DoctorCard,
-  type DoctorCardProps,
-  type DoctorCardDoctor,
-} from './DoctorCard';
+export { DoctorCard, type DoctorCardProps, type DoctorCardDoctor } from './DoctorCard';
 export {
   OTPInputBox,
   mapVerifyOtpApiError,

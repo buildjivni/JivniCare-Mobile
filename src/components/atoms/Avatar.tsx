@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, Text, View } from 'react-native';
 import { User } from 'lucide-react-native';
-import type { AccessibleProps } from '../../types/accessibility';
+import type { AccessibleProps } from '@/types/accessibility';
 
 export type AvatarSize = 'small' | 'medium' | 'large' | 'xlarge';
 export type AvatarStatus = 'online' | 'offline' | 'busy';
@@ -69,7 +69,10 @@ export function Avatar({
         {source ? (
           <Image source={{ uri: source }} className="h-full w-full" resizeMode="cover" />
         ) : fallback ? (
-          <Text className={`font-semibold text-textSecondary ${TEXT_SIZE_CLASS[size]}`} numberOfLines={1}>
+          <Text
+            className={`font-semibold text-textSecondary ${TEXT_SIZE_CLASS[size]}`}
+            numberOfLines={1}
+          >
             {fallback}
           </Text>
         ) : (
