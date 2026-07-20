@@ -1152,6 +1152,41 @@ to consume, not to power any new user-visible screen yet.
 > already anticipated and reconciled by this document's existing Section 5 text. See
 > `docs/implementation/M4-API-Foundation-Report.md` for full details.
 
+> **M5 (Repository Foundation) status — 2026-07-20:** Phase 0.5's `src/repositories/` is done:
+> all 7 domains Section 6 documents (`Auth`/`Doctor`/`Booking`/`Queue`/`Waitlist`/`Notification`/
+> `Profile`) have an interface + `Http*`/`Mock*` implementation pair, matching Section 6's own
+> method signatures exactly — no speculative methods. A `src/repositories/index.ts` factory
+> reads `FEATURE_FLAGS.USE_MOCK_DATA` (built ahead of time in M3) and exports the chosen
+> implementation per domain; Services (unbuilt) are meant to import only from `@/repositories`.
+> Of this milestone's four "Repository Base" examples (`BaseRepository`/`RepositoryResult`/
+> `RepositoryError`/generic CRUD abstractions), **none are documented anywhere in this
+> document** — Section 6's pattern is one bespoke interface per domain with no shared base
+> class or result wrapper — so none were built, per "do not invent patterns not present in the
+> design." The one genuinely-documented shared piece, `mockDelay(ms, signal)`, was built at
+> `src/repositories/shared/mockDelay.ts`. `src/types/` gained six new domain-model files
+> (`auth.ts`, `doctor.ts`, `booking.ts`, `waitlist.ts`, `notification.ts`, `profile.ts`) that
+> Section 6's repository method signatures reference by name but this document never itemizes
+> field-by-field; three of them (`Doctor`, `QueueToken`, `Notification`) are **deliberately
+> partial types** built only from fields `docs/11-API-Contract.md` or an existing sibling UI type
+> actually confirms — flagged as technical debt, not guessed further. `src/data/` gained one
+> fixture file per domain for the new `Mock*Repository` implementations; the pre-existing
+> `mockDoctor.ts` (a different, UI-shaped type) was left untouched. Four repository methods throw
+> a new, repository-scoped `NotImplementedError` in their `Http*` implementation instead of
+> calling a real endpoint: `DoctorRepository.getById` (F05 has no itemized endpoint),
+> `WaitlistRepository.join` (this document's own Section 6 already flags this endpoint as
+> undocumented), `ProfileRepository.update` (F14 has no documented endpoint, matching M4's same
+> finding for `src/api/endpoints/profile/`), and — a genuine transport conflict found during this
+> milestone's required cross-check — `QueueRepository.getTokenStatus` (F09's only documented
+> transport is an SSE stream, which cannot be represented as the one-shot
+> `Promise<QueueToken>` Section 6's interface requires; no simple polling GET is documented as an
+> alternative). The other 9 methods call their exact documented endpoint via `apiClient`. No
+> repository-level error-translation scheme is documented, so none was built beyond a generic
+> `assertSuccessResponse` 2xx gate (`src/repositories/shared/`) — errors from the API Foundation
+> propagate unchanged, translation of specific error codes remains a Service-layer concern.
+> `consent/` and `lead/` (scaffolded by M1 but outside both this milestone's and Section 6's
+> 7-domain list) were left untouched. See
+> `docs/implementation/M5-Repository-Foundation-Report.md` for full details.
+
 ---
 
 ## 21. Risk Register
