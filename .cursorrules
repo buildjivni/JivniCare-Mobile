@@ -1,0 +1,14 @@
+# JivniCare Mobile — Cursor Rules
+
+## Documentation
+
+- Read `docs/13-AI-Development-Rules.md` before writing code.
+- UI components: `docs/09-Component-Library.md`
+- Design tokens (colors, typography, spacing): `docs/08-Design-System.md`
+- All brand asset and brand-specific color rules are strictly in `@docs/08.1-Brand-Assets.md`. Do not read any documentation files outside of the `@docs/` folder.
+
+## Code Conventions
+
+- TypeScript + React Native (Expo) + NativeWind
+- Use Lucide icons per `docs/08-Design-System.md` — not emoji for structural UI elements
+- Match API field names exactly as documented in `docs/11-API-Contract.md`

@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "JivniCare",
+    "slug": "jivnicare-mobile",
+    "version": "1.0.0",
+    "scheme": "jivnicare",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": false
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#F8F9FA"
+      },
+      "package": "com.jivnicaremobile.jivnicaremobile"
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-status-bar"
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "5917ce1b-b286-4a7a-bfcf-3d89ac09ed3d"
+      }
+    }
+  }
+}
