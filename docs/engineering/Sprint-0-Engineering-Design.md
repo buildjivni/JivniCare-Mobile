@@ -1217,6 +1217,27 @@ to consume, not to power any new user-visible screen yet.
 > undocumented method. See `docs/implementation/M6-Service-Foundation-Report.md` for full
 > details.
 
+> **M7 (State Management) status — 2026-07-20:** Phase 0.7's `src/store/` is done — but scoped
+> to the **4 Zustand slices Phase 0.7 itself names** (`authStore`, `languageStore`, `uiStore`,
+> `bookingDraftStore`), not the 7-domain list (`Auth`/`Doctor`/`Booking`/`Queue`/`Waitlist`/
+> `Profile`/`Notification`) this milestone's instructions requested. Cross-checking against
+> Section 4 found **no documented Zustand store for Doctor, Queue, Waitlist, Profile, or
+> Notification at all** — Section 4's own explicit rule ("React Query and Zustand never
+> duplicate the same data... If a value is fetched from the backend, it lives in React Query's
+> cache and nowhere else") assigns all five of those domains' data to React Query, not Zustand;
+> none was invented, per this milestone's own "STOP instead of inventing it" instruction.
+> "Booking" maps only to the narrow, already-documented `bookingDraftStore` (pre-confirm
+> selection state), not a general booking-history store. `authStore` persists `isAuthenticated`
+> + `user` (reusing Milestone 5's `UserProfile` type, since no separate `PublicUserProfile` type
+> is defined anywhere) via `AsyncStorageAdapter`, and calls `AuthService.logout()` — its one
+> Service dependency. `languageStore` and `uiStore` were built even though neither was named in
+> the milestone's 7-domain list, since both are genuinely documented, in-scope Phase-0.7 slices;
+> `uiStore` wires `core/network`'s connectivity listener, closing the exact seam that module's own
+> Milestone-3 comment deferred to "whichever milestone builds `src/store/`." One new key,
+> `STORAGE_KEYS.AUTH_SESSION_CACHE`, was added to Milestone 3's `storageKeys.ts` for `authStore`'s
+> persistence (additive only — no existing key changed). See
+> `docs/implementation/M7-State-Management-Report.md` for full details.
+
 ---
 
 ## 21. Risk Register

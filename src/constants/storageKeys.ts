@@ -8,6 +8,10 @@ export const STORAGE_KEYS = {
   AUTH_ACCESS_TOKEN: 'auth.accessToken',
   AUTH_REFRESH_TOKEN: 'auth.refreshToken',
   SETTINGS_LANGUAGE: 'settings.language',
+  /** Zustand `persist` key for `authStore`'s non-token cache (`isAuthenticated` + `user`) —
+   * added in Milestone 7 (State Management), Section 4's documented AsyncStorage-persisted
+   * `authStore` slice. Never holds a raw token; see `AUTH_ACCESS_TOKEN`/`AUTH_REFRESH_TOKEN`. */
+  AUTH_SESSION_CACHE: 'auth.sessionCache',
 } as const;
 
 export type StorageKey = (typeof STORAGE_KEYS)[keyof typeof STORAGE_KEYS];
