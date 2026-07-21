@@ -1187,6 +1187,36 @@ to consume, not to power any new user-visible screen yet.
 > 7-domain list) were left untouched. See
 > `docs/implementation/M5-Repository-Foundation-Report.md` for full details.
 
+> **M6 (Service Foundation) status — 2026-07-20:** Phase 0.6's `src/services/` is done for the 7
+> domains this milestone's own instructions named (`Auth`/`Doctor`/`Booking`/`Queue`/`Waitlist`/
+> `Notification`/`Profile`) — `SettingsService`/`AnalyticsService` (present in Section 7's 8-row
+> table and the Section 2 folder tree) were **not** built, since the user-supplied instructions'
+> explicit 7-service list excludes them, matching the same "instruction's own exact list wins"
+> precedent M4/M5 already established for endpoint/repository folders. Each service is a flat
+> file exporting a `PascalCase` object literal (`export const BookingService = {...}`), per
+> Section 6's own `BookingService` code example and Section 19's naming convention — not a
+> class/interface pair like the Repository layer — with a hand-written `*ServiceContract`
+> interface alongside each, since this milestone's own instructions asked for "interfaces and
+> implementations" explicitly. `AuthService` was built feature-complete per Section 5 item 4's
+> explicit exception: real `core/storage` (`SecureStoreAdapter`) token persistence, an in-memory
+> access-token cache for a future auth interceptor to read, and generic expiry-driven refresh
+> scheduling. Every other service is a thin, mostly pass-through orchestration layer over
+> Milestone 5's repositories. Several named Section 7 responsibilities were **deliberately not
+> built** because their content lives in documents outside this milestone's read-first scope
+> (`05-Business-Rules.md`, `10-UX-Writing-Guide.md`, `15-Known-Gaps.md`) or depends on
+> infrastructure Milestone 4 explicitly deferred (`ApiError.code`'s named-code taxonomy does not
+> exist yet): `BookingService`'s 13-code (Rule B6) error mapping and `dailyLimitContext`
+> disambiguation, `QueueService`'s cancellable-state check (Rule C1), `AuthService`'s
+> 2-session-limit-aware error handling, and `DoctorService`'s `isLive`/`isClosed` derivation
+> (which Section 7 itself already qualifies as "once backend fields exist" — they don't).
+> `WaitlistService` was built even though Section 7's table has no row for it at all — Section 4's
+> Feature-hook table and this milestone's own instructions both name it, so it was built as a
+> thin pass-through with zero invented rule content. `ProfileRepository.deactivate()` (F18) has
+> no Service caller in this milestone: Section 7 assigns that orchestration to `SettingsService`,
+> outside this milestone's 7-service list, and adding it to `ProfileService` would be an
+> undocumented method. See `docs/implementation/M6-Service-Foundation-Report.md` for full
+> details.
+
 ---
 
 ## 21. Risk Register
